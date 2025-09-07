@@ -138,17 +138,6 @@ Sugerencias de uso:
 - Prueba la opción 7 para ver una simulación rápida.
 - Usa "aleatorio" en entradas/salidas para simular tráfico masivo.
 
----
-
-## Mejoras posibles (próximos pasos sugeridos)
-
-- Usar `TARIFA_POR_HORA` y el tiempo real de estacionamiento (tiempo entre entrada y salida) para calcular tarifas reales.
-- Evitar duplicados de placas en `placas_autos` o cambiar el modelo para almacenar instancias de vehículos con identificadores únicos.
-- Persistencia: guardar `historial_eventos` en un archivo CSV o base de datos.
-- Exponer una API REST o interfaz web para control remoto y visualización.
-- Añadir tests unitarios para métodos clave.
-
----
 
 ## Licencia y autor
 

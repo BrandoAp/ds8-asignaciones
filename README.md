@@ -138,11 +138,8 @@ Sugerencias de uso:
 - Prueba la opción 7 para ver una simulación rápida.
 - Usa "aleatorio" en entradas/salidas para simular tráfico masivo.
 
-
 ## Licencia y autor
 
 Archivo de ejemplo para una asignación de curso. Libre para estudiar y modificar.
 
 ---
-
-Si deseas que mejore el README (añadir diagramas, ejemplos de salida, o instrucciones de pruebas automatizadas), dime qué prefieres y lo añado.

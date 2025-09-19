@@ -52,4 +52,10 @@ class CamaraSeguridad(DispositivoIoT):
     def leer_dato(self):
         print(f"📷 {self.nombre} en {self.ubicacion} está grabando en {self.resolucion}.")
         return f"Grabando en {self.resolucion}"
-
+#funcion recursiva
+def moritorear_ciclos(dispositivo, ciclos):
+    if ciclos <= 0:
+        print ("moritoreo finalizado.")
+    else:
+        print(f"Ciclo {ciclos}: {dispositivo.moritorear()}")
+        moritorear_ciclos(dispositivo,ciclos-1)

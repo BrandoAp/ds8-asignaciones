@@ -52,13 +52,20 @@ class CamaraSeguridad(DispositivoIoT):
     def leer_dato(self):
         print(f"📷 {self.nombre} en {self.ubicacion} está grabando en {self.resolucion}.")
         return f"Grabando en {self.resolucion}"
-#funcion recursiva
-def moritorear_ciclos(dispositivo, ciclos):
+
+
+# función recursiva corregida
+def monitorear_ciclos(dispositivo, ciclos):
     if ciclos <= 0:
-        print ("moritoreo finalizado.")
+        print("Monitoreo finalizado.")
     else:
-        print(f"Ciclo {ciclos}: {dispositivo.moritorear()}")
-        moritorear_ciclos(dispositivo,ciclos-1)
+        # Verifica si el dispositivo tiene el método leer_dato
+        if hasattr(dispositivo, "leer_dato"):
+            print(f"Ciclo {ciclos}: {dispositivo.leer_dato()}")
+        else:
+            print(f"Ciclo {ciclos}: {dispositivo.nombre} no puede ser monitoreado.")
+        monitorear_ciclos(dispositivo, ciclos - 1)
+
 
 # ================================================================
 # ✅ Función que recibe otra función como parámetro (lo que te asignaron a ti)
@@ -73,8 +80,6 @@ def aplicar_funcion(dispositivos, funcion):
         resultados.append(funcion(d))
     return resultados
 
-
-# Ejemplo de uso
 if __name__ == "__main__":
     # Crear dispositivos
     temp = SensorTemperatura("Sensor Temp", "Sala")
@@ -93,3 +98,29 @@ if __name__ == "__main__":
     # También podemos pasar una función lambda como parámetro
     print("\n--- Solo los nombres de los dispositivos ---")
     print(aplicar_funcion(dispositivos, lambda d: d.nombre))
+
+    print("\n--- Gestión con funciones estándar ---")
+    print(f"Cantidad de dispositivos: {len(dispositivos)}")
+
+    # Leer datos de sensores (simulación)
+    datos_temperatura = [d.leer_dato() for d in dispositivos if isinstance(d, SensorTemperatura)]
+    if datos_temperatura:
+        print(f"Temperatura máxima: {max(datos_temperatura):.2f} °C")
+        print(f"Temperatura mínima: {min(datos_temperatura):.2f} °C")
+        print(f"Temperatura promedio: {sum(datos_temperatura)/len(datos_temperatura):.2f} °C")
+
+    # Ordenar dispositivos por nombre
+    dispositivos_ordenados = sorted(dispositivos, key=lambda d: d.nombre)
+    print("\nDispositivos ordenados por nombre:")
+    for d in dispositivos_ordenados:
+        print(f"- {d.nombre} ({d.ubicacion})")
+
+    # Filtrar dispositivos que están apagados usando lambda y filter
+    apagados = list(filter(lambda d: d.obtener_estado() == "Apagado", dispositivos))
+    print("\nDispositivos apagados:")
+    for d in apagados:
+        print(f"- {d.nombre} ({d.ubicacion})")
+
+    # Ejemplo de monitoreo recursivo
+    print("\n--- Monitoreo recursivo de Sensor de Temperatura ---")
+    monitorear_ciclos(temp, 3)

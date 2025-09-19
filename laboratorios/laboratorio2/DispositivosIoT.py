@@ -59,3 +59,37 @@ def moritorear_ciclos(dispositivo, ciclos):
     else:
         print(f"Ciclo {ciclos}: {dispositivo.moritorear()}")
         moritorear_ciclos(dispositivo,ciclos-1)
+
+# ================================================================
+# ✅ Función que recibe otra función como parámetro (lo que te asignaron a ti)
+# ================================================================
+def aplicar_funcion(dispositivos, funcion):
+    """
+    Recibe una lista de dispositivos y una función,
+    aplica esa función a cada dispositivo y devuelve los resultados.
+    """
+    resultados = []
+    for d in dispositivos:
+        resultados.append(funcion(d))
+    return resultados
+
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    # Crear dispositivos
+    temp = SensorTemperatura("Sensor Temp", "Sala")
+    mov = SensorMovimiento("Sensor Mov", "Garaje")
+    cam = CamaraSeguridad("Camara 1", "Entrada")
+
+    dispositivos = [temp, mov, cam]
+
+    # Pasamos una función normal como parámetro
+    def obtener_info(d):
+        return f"{d.nombre} en {d.ubicacion} está {d.obtener_estado()}"
+
+    print("\n--- Estados de los dispositivos ---")
+    print(aplicar_funcion(dispositivos, obtener_info))
+
+    # También podemos pasar una función lambda como parámetro
+    print("\n--- Solo los nombres de los dispositivos ---")
+    print(aplicar_funcion(dispositivos, lambda d: d.nombre))
